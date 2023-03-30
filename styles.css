@@ -1,0 +1,21 @@
+body{
+    width: 100vw;
+}
+header{
+    width: 100%;
+    height: 15vh;
+    display: flex;
+    flex-direction: row;
+}
+header nav ul{
+    display: flex;
+    flex-direction: row;
+}
+body{
+    height: 80vh;
+    background-color:aliceblue ;
+}
+footer{
+    height: 5vh;
+}
+
