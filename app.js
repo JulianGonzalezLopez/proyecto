@@ -3,6 +3,8 @@ const region_input = document.getElementById("region_input");
 const summoner_display = document.getElementById("summoner_display");
 const summoner_data = summoner_display.getElementsByTagName("ul")[0];
 const summoner_image = summoner_display.getElementsByTagName("img")[0];
+const summoner_display_history = document.getElementById("summoner_display_history");
+
 
 const API_KEY = "RGAPI-c8ccd537-d3fc-46b3-a256-766611c8b23d";
 
@@ -29,13 +31,12 @@ async function rellenarInfoPartidas(){
 
   let basicData = await basicInfoSummoner()
   let matchIdList = await matchIds(basicData.puuid);
-  console.log(matchIdList);
-
+  //console.log(matchIdList);
   for(let i = 0; i < 3; i++){
-
     let match_data = await matchInfo(matchIdList[i]);
     let player_match_data = await player_matchData(match_data,basicData.puuid);
-    console.log(`${player_match_data.championName} ${player_match_data.kills} ${player_match_data.deaths} ${player_match_data.assists}`);
+    summoner_display_history.getElementsByTagName("table")[0].appendChild(crearRegistro([player_match_data.championName,player_match_data.kills,player_match_data.deaths,player_match_data.assists]))
+    //console.log(`${player_match_data.championName} ${player_match_data.kills} ${player_match_data.deaths} ${player_match_data.assists}`);
   }
 }
 //retorna informacion auxiliar y nivel de invocador 
@@ -70,4 +71,19 @@ function player_matchData(matchData,pid){
       return matchData.info.participants[i];
     }
   }
+}
+
+//Crea y retorna un elemento tr con la cantidad de sub-elementos td como informacion se necesite en la tabla
+function crearRegistro(infoPartida){
+
+  let tr = document.createElement("tr");
+
+  for(let i = 0; i < infoPartida.length; i++){
+    let td = document.createElement("td");
+    tdText = document.createTextNode(infoPartida[i]);
+    td.appendChild(tdText);
+    tr.appendChild(td);
+  }
+
+  return tr;
 }
