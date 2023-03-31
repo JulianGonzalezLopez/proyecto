@@ -16,6 +16,11 @@ main{
     height: 70vh;
     background-color:aliceblue;
 }
+#summoner_image{
+    border-radius: 50%;
+    width: 100px;
+    height: auto;
+}
 
 #summoner_display_main{
     width: 100%;
@@ -28,6 +33,25 @@ main{
     flex:1;
 }
 
+#summoner_display{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#summoner_display > ul{
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    padding: 0;
+}
+
+#summoner_display > ul > li{
+    text-decoration: none;
+    list-style: none;
+    padding: 5px;
+}
+
 tr,td {
     padding: 10px;
     width: 20%;
@@ -38,3 +62,10 @@ footer{
     height: 5vh;
 }
 
+
+@media (max-height: 600px){
+    #summoner_display_main{
+        flex-direction: column;
+
+    }
+}
