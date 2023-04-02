@@ -6,7 +6,7 @@ const summoner_image = summoner_display.getElementsByTagName("img")[0];
 const summoner_display_history = document.getElementById("summoner_display_history");
 
 
-const API_KEY = "RGAPI-03422882-25da-4e72-b4c3-78fe4521082c";
+const API_KEY = "RGAPI-5cf1e0d4-2a84-45be-b3a6-dd611a757732";
 
 summoner_input.addEventListener("keydown", (event) => {
   if (event.isComposing || event.key === "Enter") {
@@ -30,7 +30,7 @@ async function rellenarInfoSummoner(){
     } 
     //summoner_data.children[2].textContent = `SoloQ = ${rankData[0].tier} ${rankData[0].rank}`; 
     //summoner_data.children[3].textContent = `DuoQ = ${rankData[1].tier} ${rankData[1].rank}`; 
-    summoner_data.children[4].textContent = `Winratio ${(rankData[0].wins + rankData[1].wins)/(rankData[0].wins + rankData[1].wins + rankData[0].losses + rankData[1].losses)}  `; 
+    summoner_data.children[4].textContent = `Winratio ranked ${(rankData[0].wins + rankData[1].wins)/(rankData[0].wins + rankData[1].wins + rankData[0].losses + rankData[1].losses)}  `; 
 }
 //a futuro rellena informacion sobre las partidas dinamicamente en un table 
 async function rellenarInfoPartidas(){
@@ -47,30 +47,45 @@ async function rellenarInfoPartidas(){
     //console.log(`${player_match_data.championName} ${player_match_data.kills} ${player_match_data.deaths} ${player_match_data.assists}`);
   }
 }
+
+//Funcion para pedir toda la info buscando el estandar DRY uwu
+async function genericRequest(endpoint){
+  try{
+    let res = await fetch(endpoint);
+    if(res.ok){
+      let resJSON = await res.json();
+      return resJSON;      
+    }  
+  }
+  catch(e){
+    return null;
+  }
+}
+
 //retorna informacion auxiliar y nivel de invocador 
 async function basicInfoSummoner() {
-    let res = await fetch(`https://la2.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summoner_input.value}?api_key=${API_KEY}`);
-    let resJSON = await res.json();
-    return resJSON;
+  let res = await genericRequest(`https://la2.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summoner_input.value}?api_key=${API_KEY}`);
+  if(res != null){
+    return res;
+  }
+  else{
+    console.log("404");
+  }
 }
-//retorna el rango del invocador
+//retorna el rango del invocador (nada, soloq, flex, soloq y flex)
 async function summonerRank(data) {
-    let res = await fetch(`https://la2.api.riotgames.com/lol/league/v4/entries/by-summoner/${data.id}?api_key=${API_KEY}`);
-    let resJSON = res.json()
-    return resJSON;
+  let res = await genericRequest(`https://la2.api.riotgames.com/lol/league/v4/entries/by-summoner/${data.id}?api_key=${API_KEY}`);
+  return res;
 }
 //retorna lista de ID para usar en la funcion matchInfo
 async function matchIds(puuid){
-  let res = await fetch(`https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=20&api_key=${API_KEY}`);
-  let resJSON = res.json();
-  return resJSON;
+  let res = await genericRequest(`https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=20&api_key=${API_KEY}`);
+  return res;
 }
-
 //retorna informacion de partida via id, se usa para mostrar modo de juego y ademas se usa en la funcion player_matchData
 async function matchInfo(match_id){
-  let res = await fetch(`https://americas.api.riotgames.com/lol/match/v5/matches/${match_id}?api_key=${API_KEY}`);
-  let resJSON = res.json();
-  return resJSON;
+  let res = await genericRequest(`https://americas.api.riotgames.com/lol/match/v5/matches/${match_id}?api_key=${API_KEY}`);
+  return res;
 }
 //retorna informacion sobre el jugador en cuestion en la partida dada por matchData
 function player_matchData(matchData,pid){
