@@ -5,8 +5,11 @@ const summoner_data = summoner_display.getElementsByTagName("ul")[0];
 const summoner_image = summoner_display.getElementsByTagName("img")[0];
 const summoner_display_history = document.getElementById("summoner_display_history");
 
+const hashTable = {"RANKED_FLEX_SR":"Flex", "RANKED_SOLO_5x5":"Solo/Duo"};
 
-const API_KEY = "RGAPI-5cf1e0d4-2a84-45be-b3a6-dd611a757732";
+
+
+const API_KEY = "RGAPI-bcba9679-d145-4184-9b59-e50196c0693a";
 
 summoner_input.addEventListener("keydown", (event) => {
   if (event.isComposing || event.key === "Enter") {
@@ -22,15 +25,13 @@ async function rellenarInfoSummoner(){
     let rankData = await summonerRank(basicData)
     summoner_image.src = `https://ddragon.leagueoflegends.com/cdn/11.6.1/img/profileicon/${basicData.profileIconId}.png`;
     summoner_data.children[0].textContent = summoner_input.value;
-    summoner_data.children[1].textContent = basicData.summonerLevel;
+    summoner_data.children[1].textContent = `Level: ${basicData.summonerLevel}`;
     let aux = 2;
     for(let i = 0; i < rankData.length; i++){
-      summoner_data.children[aux].textContent = `${rankData[i].queueType} = ${rankData[i].tier} ${rankData[i].rank}`;  
+      summoner_data.children[aux].textContent = `${hashTable[rankData[i].queueType]} = ${rankData[i].tier} ${rankData[i].rank}`;  
       aux++;
     } 
-    //summoner_data.children[2].textContent = `SoloQ = ${rankData[0].tier} ${rankData[0].rank}`; 
-    //summoner_data.children[3].textContent = `DuoQ = ${rankData[1].tier} ${rankData[1].rank}`; 
-    summoner_data.children[4].textContent = `Winratio ranked ${(rankData[0].wins + rankData[1].wins)/(rankData[0].wins + rankData[1].wins + rankData[0].losses + rankData[1].losses)}  `; 
+    summoner_data.children[4].textContent = `Winratio ranked ${Math.trunc((rankData[0].wins + rankData[1].wins)/(rankData[0].wins + rankData[1].wins + rankData[0].losses + rankData[1].losses)*100)}%`; 
 }
 //a futuro rellena informacion sobre las partidas dinamicamente en un table 
 async function rellenarInfoPartidas(){
@@ -42,7 +43,7 @@ async function rellenarInfoPartidas(){
   for(let i = 0; i < 3; i++){
     let match_data = await matchInfo(matchIdList[i]);
     let player_match_data = await player_matchData(match_data,basicData.puuid);
-    let outcome = player_match_data.win ? "Victoria" : "Derrota";
+    let outcome = player_match_data.win ? "Victory" : "Defeat";
     summoner_display_history.getElementsByTagName("table")[0].getElementsByTagName("tbody")[0].appendChild(crearRegistro([player_match_data.championName,player_match_data.kills,player_match_data.deaths,player_match_data.assists,outcome]))
     //console.log(`${player_match_data.championName} ${player_match_data.kills} ${player_match_data.deaths} ${player_match_data.assists}`);
   }
@@ -87,6 +88,8 @@ async function matchInfo(match_id){
   let res = await genericRequest(`https://americas.api.riotgames.com/lol/match/v5/matches/${match_id}?api_key=${API_KEY}`);
   return res;
 }
+
+
 //retorna informacion sobre el jugador en cuestion en la partida dada por matchData
 function player_matchData(matchData,pid){
   for(let i = 0; i < 10; i++){
