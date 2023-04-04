@@ -31,8 +31,13 @@ async function rellenarInfoSummoner(){
       summoner_data.children[aux].textContent = `${hashTable[rankData[i].queueType]} = ${rankData[i].tier} ${rankData[i].rank}`;  
       aux++;
     } 
-    summoner_data.children[4].textContent = `Winratio ranked ${Math.trunc((rankData[0].wins + rankData[1].wins)/(rankData[0].wins + rankData[1].wins + rankData[0].losses + rankData[1].losses)*100)}%`; 
-}
+    if(rankData.length == 2){
+      summoner_data.children[4].textContent = `Winratio ranked ${Math.trunc((rankData[0].wins + rankData[1].wins)/(rankData[0].wins + rankData[1].wins + rankData[0].losses + rankData[1].losses)*100)}%`; 
+    }
+    else if(rankData.length == 1){
+      summoner_data.children[4].textContent = `Winratio ranked ${Math.trunc((rankData[0].wins)/(rankData[0].wins + rankData[0].losses)*100)}%`; 
+    }
+    }
 //a futuro rellena informacion sobre las partidas dinamicamente en un table 
 async function rellenarInfoPartidas(){
   borrarHistorial();
