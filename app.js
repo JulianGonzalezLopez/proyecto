@@ -4,12 +4,14 @@ const summoner_display = document.getElementById("summoner_display");
 const summoner_data = summoner_display.getElementsByTagName("ul")[0];
 const summoner_image = summoner_display.getElementsByTagName("img")[0];
 const summoner_display_history = document.getElementById("summoner_display_history");
+const body_sdh = summoner_display_history.getElementsByTagName("table")[0].getElementsByTagName("tbody")[0];
 
 const hashTable = {"RANKED_FLEX_SR":"Flex", "RANKED_SOLO_5x5":"Solo/Duo"};
 
-
-
 const API_KEY = "RGAPI-bcba9679-d145-4184-9b59-e50196c0693a";
+
+changeDisplay(summoner_display_history,"hidden");
+
 
 summoner_input.addEventListener("keydown", (event) => {
   if (event.isComposing || event.key === "Enter") {
@@ -17,6 +19,7 @@ summoner_input.addEventListener("keydown", (event) => {
         rellenarInfoSummoner();
         rellenarInfoPartidas();
     }
+
   }
 });
 //rellena informacion sobre el invocador en el div con id summoner_display
@@ -28,7 +31,7 @@ async function rellenarInfoSummoner(){
     summoner_data.children[1].textContent = `Level: ${basicData.summonerLevel}`;
     let aux = 2;
     for(let i = 0; i < rankData.length; i++){
-      summoner_data.children[aux].textContent = `${hashTable[rankData[i].queueType]} = ${rankData[i].tier} ${rankData[i].rank}`;  
+      summoner_data.children[aux].textContent = `${hashTable[rankData[i].queueType]} = ${rankData[i].tier} ${rankData[i].rank} (${Math.trunc((rankData[i].wins)/(rankData[i].wins + rankData[i].losses)*100)}%) `;  
       aux++;
     } 
     if(rankData.length == 2){
@@ -42,6 +45,7 @@ async function rellenarInfoSummoner(){
 async function rellenarInfoPartidas(){
   borrarHistorial();
   borrarInfoSummoner();
+  changeDisplay(summoner_display_history,"hidden");
   let basicData = await basicInfoSummoner()
   let matchIdList = await matchIds(basicData.puuid);
   //console.log(matchIdList);
@@ -50,8 +54,8 @@ async function rellenarInfoPartidas(){
     let player_match_data = await player_matchData(match_data,basicData.puuid);
     let outcome = player_match_data.win ? "Victory" : "Defeat";
     summoner_display_history.getElementsByTagName("table")[0].getElementsByTagName("tbody")[0].appendChild(crearRegistro([player_match_data.championName,player_match_data.kills,player_match_data.deaths,player_match_data.assists,outcome]))
-    //console.log(`${player_match_data.championName} ${player_match_data.kills} ${player_match_data.deaths} ${player_match_data.assists}`);
   }
+  changeDisplay(summoner_display_history,"visible");
 }
 
 //Funcion para pedir toda la info buscando el estandar DRY uwu
@@ -131,4 +135,8 @@ function borrarInfoSummoner(){
   summoner_data.children[2].textContent = ""; 
   summoner_data.children[3].textContent = "";
   summoner_data.children[4].textContent = "";
+}
+
+function changeDisplay(elemento,visibilidad){
+  elemento.style.visibility = visibilidad;
 }
