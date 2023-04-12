@@ -10,7 +10,7 @@ const body_sdh = summoner_display_history.getElementsByTagName("table")[0].getEl
 //tabla de conversion de info de respuesta
 const hashTable = {"RANKED_FLEX_SR":"Flex", "RANKED_SOLO_5x5":"Solo/Duo"};
 
-const API_KEY = "RGAPI-bcba9679-d145-4184-9b59-e50196c0693a";
+const API_KEY = "RGAPI-43586a1d-4204-46e2-aa9d-7cda60215393";
 
 changeDisplay(summoner_display_history,"hidden");
 
@@ -63,7 +63,7 @@ async function rellenarInfoPartidas(){
     let player_match_data = await player_matchData(match_data,basicData.puuid);
     let outcome = player_match_data.win ? "Victory" : "Defeat";
     summoner_display_history.getElementsByTagName("table")[0].getElementsByTagName("tbody")[0].appendChild(crearRegistro([player_match_data.championName,player_match_data.kills,player_match_data.deaths,player_match_data.assists,outcome]))
-  }
+  } 
   //Vuelve a estar visible el historial, ya completo
   changeDisplay(summoner_display_history,"visible");
 }

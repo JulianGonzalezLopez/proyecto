@@ -1,42 +1,126 @@
+:root{
+    --not-main: #205E61;
+    --main: #F9F54B;
+}
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    /*background-image: url("imagenes/bg.jpeg"); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+}
 
 header{
     width: 100%;
-    height: 15vh;
+    height: 10vh;
     display: flex;
     flex-direction: row;
-    
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--not-main);
 }
+
+header h2{
+    width: 20vw;
+    padding: 10px;
+}
+
+
+
+main{
+    min-height: 80vh;
+    height: fit-content;
+    width: 80vw;
+    background-color: var(--main);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+footer{
+    min-height: 5vh;
+    height: fit-content;
+    width: 100vw;
+    background-color: var(--not-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer > p{
+    padding: 10px;
+}
+
 
 header nav ul{
     display: flex;
-    flex-direction: row;
+    width: 80vw;
+    justify-content: space-around;
 }
 
-main{
-    height: 70vh;
-    background-color:aliceblue;
+header nav ul li{
+    list-style: none;
 }
+
+header nav ul li a{
+    text-decoration: none;
+}
+
+#menu-btn{
+    display: none;
+    padding: 10px;
+}
+
 #summoner_image{
     border-radius: 50%;
     width: 100px;
     height: auto;
 }
 
+#summoner_input_holder{
+    height: 20vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 #summoner_display_main{
     width: 100%;
-    height: 100%;
+    min-height: 60vh;
+    height: fit-content;
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
 }
-#summoner_display_main > *{
-    padding: 10px;
-    flex:1;
-}
+
 
 #summoner_display{
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex: 1;
+}
+
+#summoner_display_history{
+    flex: 1;
 }
 
 #summoner_display > ul{
@@ -58,14 +142,18 @@ tr,td {
 
 }
 
-footer{
-    height: 5vh;
-}
 
-
-@media (max-height: 600px){
+@media screen and (max-width: 800px) {
     #summoner_display_main{
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
+    #menu-btn{
+        display: block;
+    }
+    #menu-ul{
+        display: none;
     }
 }
