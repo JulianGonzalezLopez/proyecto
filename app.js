@@ -10,7 +10,7 @@ const body_sdh = summoner_display_history.getElementsByTagName("table")[0].getEl
 //tabla de conversion de info de respuesta
 const hashTable = {"RANKED_FLEX_SR":"Flex", "RANKED_SOLO_5x5":"Solo/Duo"};
 
-const API_KEY = "RGAPI-43586a1d-4204-46e2-aa9d-7cda60215393";
+const API_KEY = "RGAPI-fa7418bf-574a-45f8-93ae-d5096fb0b287";
 
 changeDisplay(summoner_display_history,"hidden");
 
