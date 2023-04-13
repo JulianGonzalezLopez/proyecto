@@ -4,10 +4,10 @@ const menu_ul_li = menu_ul.getElementsByTagName("li")
 
 function cambiarDisplay(){
     if(menu_ul.style.display == "none"){
-        menu_ul.style.display = "flex"
+        menu_ul.style.display = "flex";
     }
     else{
-        menu_ul.style.display = "none"
+        menu_ul.style.display = "none";
     }
     console.log(menu_ul.style.display);
 }
