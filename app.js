@@ -6,16 +6,37 @@ const summoner_data = summoner_display.getElementsByTagName("ul")[0];
 const summoner_image = summoner_display.getElementsByTagName("img")[0];
 const summoner_display_history = document.getElementById("summoner_display_history");
 const body_sdh = summoner_display_history.getElementsByTagName("table")[0].getElementsByTagName("tbody")[0];
+const search_btn = document.getElementById("search-btn");
+
 
 //tabla de conversion de info de respuesta
 const hashTable = {"RANKED_FLEX_SR":"Flex", "RANKED_SOLO_5x5":"Solo/Duo"};
 
-const API_KEY = "RGAPI-35dd042f-02d4-42b1-b29a-ec168222b1f6";
+const API_KEY = "RGAPI-fd95df9f-3733-4095-b511-bc582d336b25";
 
 changeDisplay(summoner_display_history,"hidden");
 
-//Disparador busqueda
-summoner_input.addEventListener("keydown", (event) => {
+
+
+//Disparador busqueda via enter
+
+if(window.navigator.userAgent.match(/android|iphone|kindle|ipad/i)){
+  
+}
+else{
+  summoner_input.addEventListener("keydown", (event) => {
+    if (event.isComposing || event.key === "Enter") {
+      if (summoner_input.value != "") {
+          rellenarInfoSummoner();
+          rellenarInfoPartidas();
+      }
+  
+    }
+  });  
+}
+
+//Disparador busqueda via boton
+search_btn.addEventListener("keydown", (event) => {
   if (event.isComposing || event.key === "Enter") {
     if (summoner_input.value != "") {
         rellenarInfoSummoner();
@@ -31,6 +52,7 @@ async function rellenarInfoSummoner(){
     let basicData = await basicInfoSummoner()
     let rankData = await summonerRank(basicData)
     summoner_image.src = `https://ddragon.leagueoflegends.com/cdn/11.6.1/img/profileicon/${basicData.profileIconId}.png`;
+    summoner_image.style.visibility = "initial"
     summoner_data.children[0].textContent = summoner_input.value;
     summoner_data.children[1].textContent = `Level: ${basicData.summonerLevel}`;
     let aux = 2;

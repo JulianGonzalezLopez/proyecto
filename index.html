@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet">
-    <title>Document</title>
+    <title>LASearch</title>
 </head>
 <body>
 
@@ -27,11 +27,14 @@
     <main>
         <section id="summoner_input_holder">
             <h2>Dime tu nombre, Invocador</h2>
-            <input type="text" id="summoner_input">
+            <div>
+                <input type="text" id="summoner_input" tabindex="1">
+                <input type="submit" id="search-btn" tabindex="2">
+            </div>
         </section>
         <div id="summoner_display_main">
             <div id="summoner_display">
-                <img id="summoner_image" src="#" alt="Imagen perfil de usuario">
+                <img id="summoner_image" src="imagenes/amarillo.png" alt="Imagen perfil de usuario">
                 <ul>
                     <li></li>
                     <li></li>
@@ -57,7 +60,7 @@
         </div>
     </main>
     <footer>
-        <p>This is not a Roit Games product. This is a page made only with its API</p>
+        <p>Proyecto creado por <a href="https://github.com/JulianGonzalezLopez/proyecto/tree/master">JulianGonzalezLopez <img class="logo-github" src="imagenes/github.svg" alt=""> </a></p>
     </footer>
     <script src="app.js"></script>
     <script src="mobile.js"></script>
