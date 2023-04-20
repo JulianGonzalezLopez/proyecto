@@ -23,7 +23,9 @@ main{
     padding-right: 5%;
 
     min-height: 30vh;
-}
+
+    margin:50px;
+    }
 
 .home-section h1, .home-section h2{
     margin-bottom: 1rem;
@@ -32,3 +34,12 @@ main{
 .home-section p a{
     color: #205E61;
 }
+
+
+@media screen and (max-width:800px){
+    .home-section{
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
