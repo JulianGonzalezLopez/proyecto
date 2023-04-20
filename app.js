@@ -23,7 +23,7 @@ changeDisplay(summoner_display_history,"hidden");
 if(window.navigator.userAgent.match(/android|iphone|kindle|ipad/i)){
   
 }
-else{
+else{ 
   summoner_input.addEventListener("keydown", (event) => {
     if (event.isComposing || event.key === "Enter") {
       if (summoner_input.value != "") {
@@ -36,16 +36,13 @@ else{
 }
 
 //Disparador busqueda via boton
-search_btn.addEventListener("keydown", (event) => {
-  if (event.isComposing || event.key === "Enter") {
+search_btn.addEventListener("click", (event) => {
+  console.log("asd");
     if (summoner_input.value != "") {
         rellenarInfoSummoner();
         rellenarInfoPartidas();
     }
-
-  }
 });
-
 
 //rellena informacion sobre el invocador en el div con id summoner_display
 async function rellenarInfoSummoner(){
