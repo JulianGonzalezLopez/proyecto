@@ -12,7 +12,7 @@ const search_btn = document.getElementById("search-btn");
 //tabla de conversion de info de respuesta
 const hashTable = {"RANKED_FLEX_SR":"Flex", "RANKED_SOLO_5x5":"Solo/Duo"};
 
-const API_KEY = "RGAPI-fd95df9f-3733-4095-b511-bc582d336b25";
+const API_KEY = "RGAPI-c7c5613f-284f-4127-9840-2d564b23075a";
 
 changeDisplay(summoner_display_history,"hidden");
 
@@ -48,7 +48,7 @@ search_btn.addEventListener("click", (event) => {
 async function rellenarInfoSummoner(){
     let basicData = await basicInfoSummoner()
     let rankData = await summonerRank(basicData)
-    summoner_image.src = `https://ddragon.leagueoflegends.com/cdn/11.6.1/img/profileicon/${basicData.profileIconId}.png`;
+    await summonerImage(`https://ddragon.leagueoflegends.com/cdn/11.6.1/img/profileicon/${basicData.profileIconId}.png`);
     summoner_image.style.visibility = "initial"
     summoner_data.children[0].textContent = summoner_input.value;
     summoner_data.children[1].textContent = `Level: ${basicData.summonerLevel}`;
@@ -125,6 +125,19 @@ async function matchIds(puuid){
 async function matchInfo(match_id){
   let res = await genericRequest(`https://americas.api.riotgames.com/lol/match/v5/matches/${match_id}?api_key=${API_KEY}`);
   return res;
+}
+
+async function summonerImage(url){
+  summoner_image.src = "imagenes/amarillo.png"; 
+  try{
+    let res = await fetch(url);
+    if(res.status == 200){
+      summoner_image.src = url; 
+    }  
+  }
+  catch(e){
+    return null;
+  }
 }
 
 

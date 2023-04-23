@@ -17,22 +17,24 @@ a{
 }
 
 body{
-    background-image: url(imagenes/background.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+    background-image: url(imagenes/fondo_pag.jpg);
+    background-size: 250px;
     justify-content: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    min-height: 100%;
+    min-height: 100vh;
+
 }
+
+
 
 header{
     width: 100%;
-    min-height: 10vh;
+    height: 11vh;
     display: flex;
+    flex-grow: 0;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -43,22 +45,24 @@ header h2{
     width: 20vw;
     padding: 20px;
     color: white;
-    flex-grow: 1;
 }
 
 
 
 main{
-    min-height: 83vh;
-    width: 80vw;
-    background-color: var(--main);
+    min-height: 80vh;
+    width: 75vw;
+    background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    flex:1;
 }
 
+h1{
+    font-size: 2rem;
+}
 
 footer{
     min-height: 5vh;
@@ -143,6 +147,12 @@ header nav ul li a{
     flex: 1;
 }
 
+#summoner_display_history table{
+    text-align: center;
+}
+
+
+
 #summoner_display > ul{
     width: 100%;
     justify-content: center;
@@ -188,6 +198,26 @@ tr,td {
     }
 
     main{
-        width: 100%;
+        width: 85%;
     }
+    body{
+        background-size: 150px;
+    }
+    h1{
+        font-size: 1.5rem;
+    }
+}
+
+
+@media screen and (max-width: 450px){
+    body{
+        background-size: 90px;
+    }
+    main{
+        width: 95%;
+    }
+    h1{
+        font-size: 1.3rem;
+    }
+
 }
