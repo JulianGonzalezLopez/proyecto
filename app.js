@@ -118,6 +118,8 @@ async function basicInfoSummoner() {
   }
   else{
     console.log("404");
+    search_btn.disabled = false;
+    summoner_input.disabled = false;
   }
 }
 //retorna el rango del invocador (nada, soloq, flex, soloq y flex)
