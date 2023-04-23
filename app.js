@@ -27,6 +27,8 @@ else{
   summoner_input.addEventListener("keydown", (event) => {
     if (event.isComposing || event.key === "Enter") {
       if (summoner_input.value != "") {
+          summoner_input.disabled = true;
+          search_btn.disabled = true;
           rellenarInfoSummoner();
           rellenarInfoPartidas();
       }
@@ -39,6 +41,8 @@ else{
 search_btn.addEventListener("click", (event) => {
   console.log("asd");
     if (summoner_input.value != "") {
+        summoner_input.disabled = true;
+        search_btn.disabled = true;
         rellenarInfoSummoner();
         rellenarInfoPartidas();
     }
@@ -69,6 +73,9 @@ async function rellenarInfoSummoner(){
 
 //a futuro rellena informacion sobre las partidas dinamicamente en un table 
 async function rellenarInfoPartidas(){
+
+  let tbody = summoner_display_history.getElementsByTagName("table")[0].getElementsByTagName("tbody")[0];
+
   //Preparaciones iniciales al HTML
   borrarHistorial();
   borrarInfoSummoner();
@@ -81,10 +88,12 @@ async function rellenarInfoPartidas(){
     let match_data = await matchInfo(matchIdList[i]);
     let player_match_data = await player_matchData(match_data,basicData.puuid);
     let outcome = player_match_data.win ? "Victory" : "Defeat";
-    summoner_display_history.getElementsByTagName("table")[0].getElementsByTagName("tbody")[0].appendChild(crearRegistro([player_match_data.championName,player_match_data.kills,player_match_data.deaths,player_match_data.assists,outcome]))
+    tbody.appendChild(crearRegistro([player_match_data.championName,player_match_data.kills,player_match_data.deaths,player_match_data.assists,outcome]))
   } 
   //Vuelve a estar visible el historial, ya completo
   changeDisplay(summoner_display_history,"visible");
+  search_btn.disabled = false;
+  summoner_input.disabled = false;
 }
 
 //Funcion para pedir toda la info buscando el estandar DRY uwu
@@ -176,6 +185,7 @@ function borrarInfoSummoner(){
   summoner_data.children[2].textContent = ""; 
   summoner_data.children[3].textContent = "";
   summoner_data.children[4].textContent = "";
+  summoner_display_history.getElementsByTagName("table")[0].getElementsByTagName("tbody")[0].innerHTML = "";
 }
 
 function changeDisplay(elemento,visibilidad){
