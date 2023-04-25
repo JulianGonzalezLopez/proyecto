@@ -117,6 +117,7 @@ async function basicInfoSummoner() {
     return res;
   }
   else{
+    alert("No existe este invocador");
     console.log("404");
     search_btn.disabled = false;
     summoner_input.disabled = false;
