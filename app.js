@@ -12,7 +12,7 @@ const search_btn = document.getElementById("search-btn");
 //tabla de conversion de info de respuesta
 const hashTable = {"RANKED_FLEX_SR":"Flex", "RANKED_SOLO_5x5":"Solo/Duo"};
 
-const API_KEY = "RGAPI-b10724e8-9529-4727-8c3c-8c8ad928ae60";
+const API_KEY = "RGAPI-ebbbca46-da57-4b11-9524-86e36c1eb3a8";
 
 changeDisplay(summoner_display_history,"hidden");
 
