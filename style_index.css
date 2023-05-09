@@ -1,0 +1,19 @@
+:root{
+    --not-main: #205E61;
+    --main: #F9F54B;
+    font-family: 'Inter', sans-serif;
+}
+
+
+#search-btn, #summoner_input{
+    padding: .5rem;
+}
+
+#search-btn{
+    background-color: var(--main);
+    border: .1rem solid black;
+}
+
+#summoner_input_holder > h1{
+    margin-bottom: .3rem;
+}

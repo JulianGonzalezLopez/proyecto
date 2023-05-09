@@ -1,0 +1,77 @@
+:root{
+    --not-main: #205E61;
+    --main: #F9F54B;
+    font-family: 'Inter', sans-serif;
+}
+
+
+body{
+    overflow-x: hidden;
+}
+
+.text{
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+h1.text{
+    font-size: 2.5rem;
+}
+
+p.text{
+    font-size: 2rem;
+}
+
+
+.formu{
+    width: 50%;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.formu *{
+    width: 100%;
+    margin: .1rem;
+    padding: .5rem .3rem;
+}
+
+.formu > label > *{
+    width: 100%;
+}
+
+.formu textarea{
+    resize: none;
+    height: 5rem;
+}
+
+.formu > div{
+    display: flex;
+    justify-content: space-around;   
+    width: 100%; 
+    margin: 0;
+    padding: 0;
+}
+
+.formu > div > input{
+    width: 40%;
+    border: .1rem solid black;
+}
+
+.formu > div > input[type=submit],input[type=reset]{
+    background-color: var(--main);
+}
+
+
+
+
+@media screen and (max-width:600px){
+    html{
+        font-size: 16px;
+    }
+    .formu{
+        width: 90%;
+    }    
+}

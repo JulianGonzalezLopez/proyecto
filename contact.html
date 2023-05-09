@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style_contact.css">
     <title>LASearch</title>
 </head>
 <body>
@@ -21,14 +22,16 @@
     </header>
 
     <main>
-        <h1>Tenes alguna recomendacion <br> para el sitio?</h1>
-        <p>Contactanos!</p>
-        <form action="">
-            <label for="email"><input type="email"></label><br>
-            <label for="tema"><input type="text"></label><br>
-            <label for="opinion"><textarea name="" id="" cols="30" rows="10"></textarea></label>
-            <input type="submit">
-            <input type="reset">
+        <h1 class="text">Tenes alguna recomendacion <br> para el sitio?</h1>
+        <p class="text">Contactanos!</p>
+        <form action="" class="formu">
+            <label for="email"><input type="email" placeholder="altomail@gmail.com"></label><br>
+            <label for="tema"><input type="text" placeholder="Error en la barra de navegacion"></label><br>
+            <label for="opinion"><textarea name="" id="" cols="30" rows="10" placeholder="Hola! El otro dia estaba navegando y me di cuenta que...."></textarea></label><br>
+            <div>
+                <input type="submit">
+                <input type="reset">
+            </div>
         </form>
     </main>
 
